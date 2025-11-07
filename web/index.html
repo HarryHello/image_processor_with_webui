@@ -1,0 +1,144 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图像处理器</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>图像处理器</h1>
+            <p>上传图像并进行各种处理操作</p>
+        </header>
+
+        <main>
+            <section class="upload-section">
+                <div class="card">
+                    <h2>上传图像</h2>
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-placeholder">
+                            <div class="upload-icon">📁</div>
+                            <p>点击或拖拽图像文件到此处</p>
+                            <p class="upload-hint">支持 JPG, PNG, PPM 格式</p>
+                        </div>
+                        <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.ppm" hidden>
+                    </div>
+                </div>
+            </section>
+
+            <section class="preview-section" id="previewSection" style="display: none;">
+                <div class="card">
+                    <h2>图像预览</h2>
+                    <div class="image-preview-container">
+                        <img id="imagePreview" src="" alt="图像预览">
+                    </div>
+                    <h4 style="margin-top: 0.5em;" id="imageInfo">图像尺寸: <span id="imageDimensions"></span></h4>
+                </div>
+            </section>
+
+            <section class="operations-section" id="operationsSection" style="display: none;">
+                
+                <div class="card">                    
+                    <!-- 缩放操作 -->
+                     <h2>缩放</h2>
+                    <div class="operation-options-scale">
+                        <div class="form-group">
+                            <label for="scaleOption">缩放选项</label>
+                            <select id="scaleOption">
+                                <option value="none">不缩放</option>
+                                <option value="dimensions">按尺寸缩放</option>
+                                <option value="factor">按比例缩放</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="dimensionsGroup" style="display: none;">
+                            <label for="newWidth">新宽度</label>
+                            <input type="number" id="newWidth" min="1" placeholder="输入宽度">
+                            
+                            <label for="newHeight">新高度</label>
+                            <input type="number" id="newHeight" min="1" placeholder="输入高度">
+                        </div>
+
+                        <div class="form-group" id="factorGroup" style="display: none;">
+                            <label for="scaleFactor">缩放比例</label>
+                            <input type="number" id="scaleFactor" min="0.1" step="0.1" placeholder="输入比例">
+                        </div>
+
+                        <div class="form-group" id="interpolationGroup" style="display: none;">
+                            <label for="interpolationMethod">插值方法</label>
+                            <select id="interpolationMethod">
+                                <option value="default" title="缩小时选择区域插值，放大时选择双三次插值" selected>
+                                    默认
+                                </option>
+                                <option value="nearest" title="适合像素艺术和整数倍放大">
+                                    近邻
+                                </option>
+                                <option value="linear" title="最常用的缩放插值算法">
+                                    双线性
+                                </option>
+                                <option value="cubic" title="提供较高的质量和细节">
+                                    双三次
+                                </option>
+                                <option value="area" title="适用于缩小图像，减少摩尔纹">
+                                    区域插值
+                                </option>
+                                <option value="lanczos" title="适用于相片的放大算法，能较好保留边缘锐度和细节">
+                                    Lanczos
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <!-- 颜色操作 -->
+                    <h2>颜色</h2>
+                    <div class="operation-options-color">
+                        <select class="color-option" id="colorOption">
+                            <option value="" disabled selected hidden>选择操作</option>
+                            <option value="grayscale">灰度化</option>
+                            <option value="invert">反色</option>
+                            <option value="brightness">调整亮度</option>
+                            <option value="contrast">调整对比度</option>
+                            <option value="saturation">调整饱和度</option>
+                        </select>
+                        <button class="add-operation-button" id="addColorOperationButton" disabled>添加</button>
+                        
+                        <div class="color-layers-container" id="colorLayersContainer">
+                            <!-- 颜色操作图层将添加到这里 -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <button class="process-button" id="processButton">处理图像</button>
+                </div>
+            </section>
+
+            <section class="result-section" id="resultSection" style="display: none;">
+                <div class="card">
+                    <h2>处理结果</h2>
+                    <div class="image-preview-container">
+                        <img id="resultImage" src="" alt="处理结果">
+                    </div>
+                    <div class="download-section">
+                        <button class="download-button" id="downloadButton">下载处理后的图像</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Made by HarryHelloo</p>
+        </footer>
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>

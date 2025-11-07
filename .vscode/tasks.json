@@ -1,0 +1,64 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "C/C++: build image_processor",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "New-Item -ItemType Directory -Force \"${workspaceFolder}/build/debug\" | Out-Null; & 'F:/cpp_mingw64/mingw64/bin/g++.exe' -fdiagnostics-color=always -g -std=c++17 \"${workspaceFolder}/src/main.cpp\" \"${workspaceFolder}/src/core/logger.cpp\" \"${workspaceFolder}/src/core/image_io.cpp\" \"${workspaceFolder}/src/core/image_scaling.cpp\" \"${workspaceFolder}/src/core/compression.cpp\" \"${workspaceFolder}/src/core/color_processing.cpp\" -o \"${workspaceFolder}/build/debug/image_processor.exe\" -I\"${workspaceFolder}/include\" -I\"${workspaceFolder}/3rdparty/opencv-mingw/include\" -L\"${workspaceFolder}/3rdparty/opencv-mingw/x64/mingw/lib\" -lopencv_core455 -lopencv_imgproc455 -lopencv_imgcodecs455 -lopencv_highgui455"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "copy_dlls",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "New-Item -ItemType Directory -Force \"${workspaceFolder}/build/debug\" | Out-Null; Copy-Item -Force \"${workspaceFolder}/3rdparty/opencv-mingw/x64/mingw/bin/*.dll\" -Destination \"${workspaceFolder}/build/debug/\"; Copy-Item -Force \"F:/cpp_mingw64/mingw64/bin/libstdc++-6.dll\",\"F:/cpp_mingw64/mingw64/bin/libgcc_s_seh-1.dll\",\"F:/cpp_mingw64/mingw64/bin/libwinpthread-1.dll\" -Destination \"${workspaceFolder}/build/debug/\""
+      ],
+      "dependsOn": [
+        "C/C++: build image_processor"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "clear": true
+      }
+    },
+    {
+      "label": "run_image_processor",
+      "type": "process",
+      "command": "${workspaceFolder}/build/debug/image_processor.exe",
+      "dependsOn": [
+        "copy_dlls"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

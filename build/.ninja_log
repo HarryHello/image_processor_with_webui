@@ -1,0 +1,11 @@
+# ninja log v7
+44	433	7842228112163293	CMakeFiles/ImageProcessor.dir/src/core/logger.cpp.obj	3ff648d179096dc1
+34	636	7842228112070453	CMakeFiles/ImageProcessor.dir/src/core/image_io.cpp.obj	32751215efea1de5
+1	662	7842228111867141	CMakeFiles/ImageProcessor.dir/src/core/color_processing.cpp.obj	eabfa445e849fee5
+39	664	7842228112111192	CMakeFiles/ImageProcessor.dir/src/core/image_scaling.cpp.obj	79787351871291b5
+20	713	7842228112019544	CMakeFiles/ImageProcessor.dir/src/core/compression.cpp.obj	a9761826c8c452eb
+49	3984	7842228112214043	CMakeFiles/ImageProcessor.dir/src/main.cpp.obj	421f81c742df186d
+54	5875	7842228112265124	CMakeFiles/ImageProcessor.dir/src/ui/web_server.cpp.obj	7d1880488fc7d255
+5881	6656	7842228170543547	Debug/ImageProcessor.exe	33540b9dfb14c125
+4	6970	7842235657810778	CMakeFiles/ImageProcessor.dir/src/ui/web_server.cpp.obj	7d1880488fc7d255
+6974	7730	7842235727509595	Debug/ImageProcessor.exe	33540b9dfb14c125
